@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <head>
-  <title>OpenAI Quickstart</title>
+  <title>AskHealth.AI</title>
   <link
     rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
+    href="{{ url_for('static', filename='user-md-solid.svg') }}"
   />
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
 
 <body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
+  <img src="{{ url_for('static', filename='user-md-solid.svg') }}" class="icon" />
+  <h3>AskHealth.AI</h3>
   <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
+    <input type="text" name="query" placeholder="What is the best treatment for influenza?" required />
+    <input type="submit" value="Ask" />
   </form>
   {% if result %}
-  <div class="result">{{ result }}</div>
+  <div class="result">{{ result }}
+    <button class="clipboard"
+      onclick="copyToClipboard('{{ result }}')">
+      <i class="fa fa-clipboard fa-lg"></i>
+      Copy text
+    </button>
+  </div>
   {% endif %}
+
+  <footer>
+    <p style="color: white; font-size: 10px; line-height: 1.0;">
+      <i class="fas fa-exclamation-circle"></i>
+      The information provided on this website (or through this conversation) is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified healthcare provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read on this website (or through this conversation).
+    </p>
+  </footer>
 </body>
+
+<script>
+  function copyToClipboard(result) {
+      navigator.clipboard.writeText(result);
+}
+</script>
+  
